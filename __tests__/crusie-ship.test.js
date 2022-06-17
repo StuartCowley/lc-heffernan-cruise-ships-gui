@@ -1,29 +1,37 @@
 const Ship = require('../src/cruise-ship');
+const Port = require('../src/port');
+// const Port = require('../src/port');
 
 describe('constructor', () => {
+    let ship;
+    let port;
+    beforeEach(() => {
+        port = new Port('Dover');
+        ship = new Ship(port);
+    }); 
     it('returns an object', () => {
-        expect(new Ship('Neptune')).toBeInstanceOf(Object);
+        expect(ship).toBeInstanceOf(Object);
     });
 
-    it('sets the name property', () => {
-        const ship = new Ship('Neptune');
-        expect(ship.name).toEqual('Neptune');
-    });
-
-    it('initial starting point is zero', () => {
-        const ship = new Ship('Neptune','Dover');
-        expect(ship.startingPoint).toEqual('Dover');
-    });
-
-    it('check passengers is an empty array', () => {
-        const ship = new Ship('Neptune');
-        expect(ship.passengers.length).toEqual(0);
+    it('initial starting point is Dover', () => {
+        expect(ship.currentPort).toEqual(port);
     });
 });
 
-describe('board passengers', () => {
-    it('has a method called boardPassenegers', () => {
-        const ship = new Ship('Neptune');
-        expect(ship.boardPassengers).toBeInstanceOf(Function);
+describe('setSail', () => {
+    let port;
+    let ship;
+    beforeEach(() => {
+        port = new Port('Dover');
+        ship = new Ship(port);
+    }); 
+    it('has a method called set sail', () => {
+        expect(ship.setSail).toBeInstanceOf(Function);
+    });
+
+    it('truthy of setSail', () => {
+        ship.setSail();
+
+        expect(ship.currentPort).toBeTruthy();
     });
 });

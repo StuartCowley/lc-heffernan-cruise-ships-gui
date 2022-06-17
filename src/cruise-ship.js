@@ -1,11 +1,14 @@
-function Ship (name,startingPoint) {
-    this.name = name;
-    this.startingPoint = startingPoint;
-    this.passengers = [];
-};
+class Ship {
+    constructor (currentPort) {
+        this.currentPort = currentPort;
+    }
+    setSail(){
+        return this.currentPort;
+    }
 
-Ship.prototype.boardPassengers = function() {
-
+    dock(newPort){
+        this.currentPort = newPort;
+    }
 };
 
 module.exports = Ship;
