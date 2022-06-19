@@ -1,4 +1,5 @@
 const Ship = require('../src/cruise-ship');
+const Itinerary = require('../src/itinerary');
 const Port = require('../src/port');
 
 
@@ -19,11 +20,13 @@ describe('Port', () => {
 describe('dock', () => {
     it('current port updates when dock is called', () => {
         const dover = new Port('Dover');
-        const ship = new Ship(dover);
         const calais = new Port('Calais');
-        
-        ship.dock(calais.name);
+        const itinerary = new Itinerary([dover, calais]);
+        const ship = new Ship(itinerary);
 
-        expect(ship.currentPort).toEqual('Calais');
+        ship.setSail();
+        ship.dock();
+
+        expect(ship.currentPort).toEqual(calais);
     });
 });
