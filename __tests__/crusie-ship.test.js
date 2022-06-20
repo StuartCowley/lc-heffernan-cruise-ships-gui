@@ -24,6 +24,11 @@ describe('constructor', () => {
     it('previous port initialises with null', () => {
         expect(ship.previousPort).toEqual(null);
     });
+
+    it('Ship gets added to Port proprty ships on initialisation', () => {
+        expect(ship.currentPort.ships[0]).toEqual(ship);
+        expect(port.ships).toContain(ship);
+    });
 });
 
 describe('setSail', () => {
@@ -51,6 +56,14 @@ describe('setSail', () => {
         ship.setSail();
 
         expect(ship.previousPort).toEqual(dover);
+        expect(ship.previousPort.ships).not.toContain(ship);
+    });
+    it('ships current port ships contain Ship', () => {
+        ship.setSail();
+        ship.dock();
+
+        expect(ship.currentPort).toEqual(calais);
+        expect(ship.currentPort.ships).toContain(ship);
     });
 
     it('edge case test, can not sail past last port', () => {

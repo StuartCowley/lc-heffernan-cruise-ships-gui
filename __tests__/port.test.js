@@ -15,6 +15,10 @@ describe('Port', () => {
     it('has name Calais', () =>{
         expect(port.name).toEqual('Calais');
     });
+
+    it('ships initiates empty', () => {
+        expect(port.ships.length).toEqual(0)
+    });
 });
 
 describe('dock', () => {
@@ -28,5 +32,28 @@ describe('dock', () => {
         ship.dock();
 
         expect(ship.currentPort).toEqual(calais);
+    });
+});
+
+describe('addShip', () => {
+    it('add ship is a method and pushes a ship into the ships array', () => {
+        const dover = new Port('Dover');
+        
+        dover.addShip('Neptune');
+
+        expect(dover.addShip).toBeInstanceOf(Function);
+        expect(dover.ships).toEqual(['Neptune'])
+    });
+});
+
+describe('removeShip', () => {
+    it('remove ship is a method', () => {
+        const dover = new Port('Dover');
+        dover.ships = ['Neptune', 'Atlantis', 'Trident', 'Poseidon'];
+        dover.removeShip('Trident');
+
+        expect(dover.removeShip).toBeInstanceOf(Function);
+        expect(dover.ships).toEqual(['Neptune', 'Atlantis', 'Poseidon']);
+
     });
 });
