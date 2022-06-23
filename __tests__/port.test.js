@@ -22,12 +22,18 @@ describe('Port', () => {
 });
 
 describe('dock', () => {
-    it('current port updates when dock is called', () => {
-        const dover = new Port('Dover');
-        const calais = new Port('Calais');
-        const itinerary = new Itinerary([dover, calais]);
-        const ship = new Ship(itinerary);
+    let dover;
+    let calais;
+    let itinerary;
+    let ship;
+    beforeEach(() => {
+        dover = new Port('Dover');
+        calais = new Port('Calais');
+        itinerary = new Itinerary([dover, calais]);
+        ship = new Ship(itinerary);
 
+    });
+    it('current port updates when dock is called', () => {
         ship.setSail();
         ship.dock();
 
@@ -36,24 +42,36 @@ describe('dock', () => {
 });
 
 describe('addShip', () => {
+    let dover;
+    let ship;
+    beforeEach(() => {
+        dover = new Port('Dover');
+        ship = jest.fn();
+    });
     it('add ship is a method and pushes a ship into the ships array', () => {
-        const dover = new Port('Dover');
-        
-        dover.addShip('Neptune');
+        dover.addShip(ship);
 
         expect(dover.addShip).toBeInstanceOf(Function);
-        expect(dover.ships).toEqual(['Neptune'])
+        expect(dover.ships).toEqual([ship])
     });
 });
 
 describe('removeShip', () => {
-    it('remove ship is a method', () => {
-        const dover = new Port('Dover');
-        dover.ships = ['Neptune', 'Atlantis', 'Trident', 'Poseidon'];
-        dover.removeShip('Trident');
+    let dover;  
+    let neptune;
+    let atlantis;
+    beforeEach(() => {
+    dover = new Port('Dover');
+    neptune = jest.fn();
+    atlantis = jest.fn();
+    });
+    it('remove ship is a method and removes an element from an array', () => {
+        dover.addShip(neptune);
+        dover.addShip(atlantis);
+        dover.removeShip(neptune);
 
         expect(dover.removeShip).toBeInstanceOf(Function);
-        expect(dover.ships).toEqual(['Neptune', 'Atlantis', 'Poseidon']);
+        expect(dover.ships).toEqual([atlantis]);
 
     });
 });

@@ -25,7 +25,7 @@ describe('constructor', () => {
         expect(ship.previousPort).toEqual(null);
     });
 
-    it('Ship gets added to Port proprty ships on initialisation', () => {
+    it('Ship gets added to Port property ships on initialisation', () => {
         expect(ship.currentPort.ships[0]).toEqual(ship);
         expect(port.ships).toContain(ship);
     });

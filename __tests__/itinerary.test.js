@@ -6,8 +6,8 @@ describe ('itinerary', () => {
     let dover;
     let calais;
     beforeEach(() => {
-        dover = new Port('Dover');
-        calais = new Port('Calais'); 
+        dover = jest.fn();
+        calais = jest.fn();
         itinerary = new Itinerary([dover, calais]);
     });
     it('itinerary is an object', () => {

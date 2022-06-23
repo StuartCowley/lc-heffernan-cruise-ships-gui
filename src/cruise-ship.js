@@ -6,8 +6,8 @@ class Ship {
         this.currentPort.addShip(this);
     }
     setSail(){
-        this.currentPort.removeShip(this);
         const itinerary = this.itinerary;
+        this.currentPort.removeShip(this);
         if(this.currentPort === itinerary.ports[itinerary.ports.length - 1]){
             throw new Error('End of itinerary');
         }
@@ -19,7 +19,6 @@ class Ship {
     dock(){
         const itinerary = this.itinerary;
         const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
-
         this.currentPort = itinerary.ports[previousPortIndex + 1];
         this.currentPort.addShip(this);
     }
