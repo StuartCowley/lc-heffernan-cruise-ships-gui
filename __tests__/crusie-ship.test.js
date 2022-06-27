@@ -1,6 +1,5 @@
 const Ship = require('../src/cruise-ship');
 const Itinerary = require('../src/itinerary');
-const Port = require('../src/port');
 
 describe('constructor', () => {
     let ship;
@@ -8,10 +7,9 @@ describe('constructor', () => {
     let port;
 
     beforeEach(() => { 
-        port = new Port('Dover');
+        port = {name: 'Dover', ships: [], addShip: jest.fn(), removeShip: jest.fn()};
         itinerary = new Itinerary([port]);
         ship = new Ship(itinerary);
-
     }); 
     it('returns an object', () => {
         expect(ship).toBeInstanceOf(Object);
@@ -25,9 +23,8 @@ describe('constructor', () => {
         expect(ship.previousPort).toEqual(null);
     });
 
-    it('Ship gets added to Port property ships on initialisation', () => {
-        expect(ship.currentPort.ships[0]).toEqual(ship);
-        expect(port.ships).toContain(ship);
+    it('Ship gets added to Port property ships on instantiation', () => {
+        expect(port.addShip).toHaveBeenCalled();
     });
 });
 
@@ -37,8 +34,8 @@ describe('setSail', () => {
     let itinerary;
     let ship;
     beforeEach(() => {
-        dover = new Port('Dover');
-        calais = new Port ('Calais');
+        dover = { name: 'Dover', ships: [], addShip: jest.fn(), removeShip: jest.fn() };
+        calais = { name: 'Calais', ships: [], addShip: jest.fn(), removeShip: jest.fn() };
         itinerary = new Itinerary([dover, calais]);
         ship = new Ship(itinerary);
     }); 
@@ -46,30 +43,18 @@ describe('setSail', () => {
         expect(ship.setSail).toBeInstanceOf(Function);
     });
 
-    it('truthy of setSail', () => {
+    it('can set sail', () => {
         ship.setSail();
 
         expect(ship.currentPort).toBeFalsy();
+        expect(dover.removeShip).toHaveBeenCalledWith(ship);
     });
 
-    it('set sail changes previous port to current port', () => {
-        ship.setSail();
-
-        expect(ship.previousPort).toEqual(dover);
-        expect(ship.previousPort.ships).not.toContain(ship);
-    });
-    it('ships current port ships contain Ship', () => {
+    it('can dock', () => {
         ship.setSail();
         ship.dock();
 
-        expect(ship.currentPort).toEqual(calais);
-        expect(ship.currentPort.ships).toContain(ship);
-    });
-
-    it('edge case test, can not sail past last port', () => {
-        ship.setSail();
-        ship.dock();
-
+        expect(calais.addShip).toHaveBeenCalledWith(ship);
         expect(() => ship.setSail()).toThrow('End of itinerary');
     });
 });
