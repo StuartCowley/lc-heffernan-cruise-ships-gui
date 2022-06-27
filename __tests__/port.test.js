@@ -1,7 +1,4 @@
-const Ship = require('../src/cruise-ship');
-const Itinerary = require('../src/itinerary');
 const Port = require('../src/port');
-
 
 describe('Port', () => {
     let port;
@@ -18,26 +15,6 @@ describe('Port', () => {
 
     it('ships initiates empty', () => {
         expect(port.ships.length).toEqual(0)
-    });
-});
-
-describe('dock', () => {
-    let dover;
-    let calais;
-    let itinerary;
-    let ship;
-    beforeEach(() => {
-        dover = new Port('Dover');
-        calais = new Port('Calais');
-        itinerary = new Itinerary([dover, calais]);
-        ship = new Ship(itinerary);
-
-    });
-    it('current port updates when dock is called', () => {
-        ship.setSail();
-        ship.dock();
-
-        expect(ship.currentPort).toEqual(calais);
     });
 });
 
@@ -72,6 +49,5 @@ describe('removeShip', () => {
 
         expect(dover.removeShip).toBeInstanceOf(Function);
         expect(dover.ships).toEqual([atlantis]);
-
     });
 });

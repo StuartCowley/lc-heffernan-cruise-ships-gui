@@ -1,5 +1,4 @@
 const Ship = require('../src/cruise-ship');
-const Itinerary = require('../src/itinerary');
 
 describe('constructor', () => {
     let ship;
@@ -8,7 +7,7 @@ describe('constructor', () => {
 
     beforeEach(() => { 
         port = {name: 'Dover', ships: [], addShip: jest.fn(), removeShip: jest.fn()};
-        itinerary = new Itinerary([port]);
+        itinerary = { ports: [port]};
         ship = new Ship(itinerary);
     }); 
     it('returns an object', () => {
@@ -36,7 +35,7 @@ describe('setSail', () => {
     beforeEach(() => {
         dover = { name: 'Dover', ships: [], addShip: jest.fn(), removeShip: jest.fn() };
         calais = { name: 'Calais', ships: [], addShip: jest.fn(), removeShip: jest.fn() };
-        itinerary = new Itinerary([dover, calais]);
+        itinerary = { ports: [dover, calais] };
         ship = new Ship(itinerary);
     }); 
     it('has a method called set sail', () => {
