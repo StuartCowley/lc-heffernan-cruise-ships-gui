@@ -17,3 +17,15 @@ body {
     overflow-x: auto;
     background-image: url('../images/water0.png');
 }
+
+#ports {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 96px;
+}
+
+#ports > .port {
+    width: 64px;
+    height: 32px;
+    background-image: url('../images/port.png');
+}
