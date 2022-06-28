@@ -28,6 +28,15 @@
                 portsElement.style.width = `${portsElementWidth + 256}px`;
             });
         };
+        renderShip(ship){
+            console.log("renderShip");
+            const indexOfCurrentPort = ship.itinerary.ports.indexOf(ship.currentPort);
+            const currentPortElement = document.querySelector(`[data-port-index="${indexOfCurrentPort}"]`);
+            const shipElement = document.querySelector('#ship');
+            shipElement.style.top = `${currentPortElement.offsetTop + 15}px`;
+            shipElement.style.left = `${currentPortElement.offsetLeft - 8}px`;
+            // currentPortElement.appendChild(shipElement);
+        };
     };
     if(typeof module !== 'undefined' && module.exports){
         module.exports = Controller;
