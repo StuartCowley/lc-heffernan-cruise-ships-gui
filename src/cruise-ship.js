@@ -14,6 +14,7 @@
             }
             this.previousPort = this.currentPort;
             this.currentPort = null;
+            
 
         }
 
