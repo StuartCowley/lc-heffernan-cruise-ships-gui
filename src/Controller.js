@@ -3,12 +3,37 @@
         constructor(ship) {
             this.ship = ship;
             this.initialiseSea();
+            this.headsUpMessageBoard();
 
             const sailButton = document.querySelector('#sailbutton');
             sailButton.addEventListener('click', () => {
+                if(document.querySelector('#sailbutton').disabled){
+                    console.log('button disabled');
+                } else {
                 this.setSail();
+                }
             });
         }
+        get messageCurrentPort() {
+            return this.ship.currentPort.name;
+        };
+
+        get messageNextPort() {
+            const indexOfNextPort = ship.itinerary.ports.indexOf(ship.currentPort) + 1;
+            let nextPort; 
+            if(!this.endOfItinerary){
+                nextPort = ship.itinerary.ports[indexOfNextPort].name;
+            } else {
+                nextPort = 'End of cruise';
+            }
+            return  nextPort;
+        };
+
+        get endOfItinerary() {
+            const indexOfNextPort = ship.itinerary.ports.indexOf(ship.currentPort) + 1; 
+            return indexOfNextPort >= this.ship.itinerary.ports.length;  
+        };
+
         initialiseSea() {
             const backgrounds = [
                 '../images/water0.png',
@@ -46,7 +71,11 @@
             const ship = this.ship;
             const indexOfNextPort = ship.itinerary.ports.indexOf(ship.currentPort) + 1;
             const nextPortElement = document.querySelector(`[data-port-index="${indexOfNextPort}"]`);
-            if (!nextPortElement){
+            const sailButton = document.querySelector('#sailbutton');
+            sailButton.innerHTML = 'Enjoy the journey';
+            sailButton.disabled = true;
+            this.headsUpMessageBoard();
+            if (this.endOfItinerary){
                 this.renderMessage(`We have reached our final port`);
             } else {
             
@@ -62,9 +91,12 @@
                         ship.setSail();
                         ship.dock();
                         this.renderMessage(`We have arrived at ${ship.currentPort.name}`);
+                        this.headsUpMessageBoard();
+                        sailButton.innerHTML = 'Sail to next port';
+                        sailButton.disabled = false;
                         clearInterval(sailInterval);
                     } else {
-                        shipElement.style.left = `${posX + 1}px`;   
+                        shipElement.style.left = `${posX + 1}px`;  
                     }
                     
                 }, 20);
@@ -74,10 +106,22 @@
             const viewportElement = document.querySelector("#viewport"); 
             const newMessageElement = document.createElement('div');
             newMessageElement.id = 'message';
-            newMessageElement.innerHTML = message;
+            if(this.endOfItinerary){
+                newMessageElement.innerHTML = `${message}, this is our final port.`
+            } else {
+                newMessageElement.innerHTML = message;
+            }
             viewportElement.appendChild(newMessageElement);
-            setTimeout(() => {viewportElement.removeChild(newMessageElement)}, 2000);
+            if(!this.endOfItinerary){
+                setTimeout(() => {viewportElement.removeChild(newMessageElement)}, 2000);
+            }
         };
+        headsUpMessageBoard() {
+            const ship = this.ship;
+            const headsUpElement = document.querySelector('#headsUpBoard');
+            headsUpElement.innerHTML = `Current port: ${this.messageCurrentPort}
+Next port: ${this.messageNextPort}`;   
+        }
     };
     if(typeof module !== 'undefined' && module.exports){
         module.exports = Controller;

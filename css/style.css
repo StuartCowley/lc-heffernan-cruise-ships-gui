@@ -2,11 +2,11 @@ html {
     height: 100%;
 }
 
-body {
+#mainContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: 100vh;
     background-color: black;
 }
 
@@ -46,8 +46,9 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     font-family: 'Press Start 2P', cursive;
+    
 }
 
 #sailbutton:focus {
@@ -60,12 +61,27 @@ body {
     cursor: pointer;
 }
 
+#sailbutton:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 #message {
     padding: 16px;
     font-family: 'Press Start 2P', cursive;
     position: absolute;
-    width: 100vw;
+    width: 100%;
     bottom: 0;
     border-top: 3px solid black;
     background-color: white;
+}
+
+#headsUpBoard {
+    position: absolute;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    right: 0;
+    padding: 16px;
+    white-space: pre-wrap;
+    text-align:right;
 }
