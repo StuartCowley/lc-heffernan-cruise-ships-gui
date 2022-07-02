@@ -1,10 +1,13 @@
 (function exportController(){
     class Controller {
         constructor(ship) {
+            
             this.ship = ship;
+            
             this.initialiseSea();
+            
             this.headsUpMessageBoard();
-
+            
             const sailButton = document.querySelector('#sailbutton');
             sailButton.addEventListener('click', () => {
                 if(document.querySelector('#sailbutton').disabled){
@@ -19,18 +22,19 @@
         };
 
         get messageNextPort() {
+            const ship = this.ship;
             const indexOfNextPort = ship.itinerary.ports.indexOf(ship.currentPort) + 1;
-            let nextPort; 
+            let nextPort;  
             if(!this.endOfItinerary){
                 nextPort = ship.itinerary.ports[indexOfNextPort].name;
             } else {
-                nextPort = 'End of cruise';
+                nextPort = 'End of cruise';  
             }
             return  nextPort;
         };
 
         get endOfItinerary() {
-            const indexOfNextPort = ship.itinerary.ports.indexOf(ship.currentPort) + 1; 
+            const indexOfNextPort = this.ship.itinerary.ports.indexOf(this.ship.currentPort) + 1; 
             return indexOfNextPort >= this.ship.itinerary.ports.length;  
         };
 
@@ -78,12 +82,9 @@
             if (this.endOfItinerary){
                 this.renderMessage(`We have reached our final port`);
             } else {
-            
                 this.renderMessage(`We have now departed from ${ship.currentPort.name}`);
-                
                 const shipElement = document.querySelector('#ship');
                 const end = parseInt(nextPortElement.offsetLeft,10);
-
                 let sailInterval = null;
                 sailInterval = setInterval(() => {
                     let posX = parseInt(shipElement.style.left, 10);
@@ -97,8 +98,7 @@
                         clearInterval(sailInterval);
                     } else {
                         shipElement.style.left = `${posX + 1}px`;  
-                    }
-                    
+                    }   
                 }, 20);
             }
         };
@@ -120,7 +120,7 @@
             const ship = this.ship;
             const headsUpElement = document.querySelector('#headsUpBoard');
             headsUpElement.innerHTML = `Current port: ${this.messageCurrentPort}
-Next port: ${this.messageNextPort}`;   
+Next port: ${this.messageNextPort}`;
         }
     };
     if(typeof module !== 'undefined' && module.exports){

@@ -85,3 +85,22 @@ html {
     white-space: pre-wrap;
     text-align:right;
 }
+
+form {
+    top: 16px;
+    left: 16px;
+    position: absolute;
+    border-style: double;
+    border-color: white;
+    padding: 10px;
+    width: fit-content;
+}
+
+label {
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+}
+
+input {
+    font-family: 'Press Start 2P', cursive;
+}

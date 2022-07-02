@@ -12,6 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+    <form>
+        <label>Add port</label><br><br>
+        <input type="text" id="newPortName" placeholder="port name"><br><br>
+        <input type="submit" id="addPort" value="add port">
+        <input type="submit" id="noMorePorts" value="done">
+    </form>
     <div id="headsUpBoard">heads up board</div>
     <div id="mainContainer">
         <div id="viewport">
@@ -25,17 +31,36 @@
         <script src="./src/cruise-ship.js"></script>
         <script src="./src/itinerary.js"></script>
         <script>
-            const itinerary = new Itinerary([
-            new Port('New York City'), 
-            new Port('Grand Turk'),
-            new Port('San Juan'),
-            new Port('Amber Cove')
-            ]);
-            const ship = new Ship(itinerary);
-            const controller = new Controller(ship);
+            const itinerary = new Itinerary([]);
+            const addPortButton = document.querySelector('#addPort');
+            addPortButton.addEventListener("click", function(event) { 
+                const newPort = document.querySelector('#newPortName');
+                if(newPort.value){
+                const port = new Port(newPort.value);
+                itinerary.ports.push(port);
+                newPort.value = '';
+                
+            } else {
+                alert('You must enter a port name');
+            }
+                event.preventDefault();
+            }, false);
 
-            controller.renderPorts(itinerary.ports);
-            controller.renderShip();
+            const noMorePortsButton = document.querySelector('#noMorePorts');
+            noMorePortsButton.addEventListener("click", function(event) { 
+                if(itinerary.ports.length<2){
+                    alert('you must add a minimum of 2 ports');
+                } else {
+                const ship = new Ship(itinerary);   
+                const controller = new Controller(ship); 
+                controller.renderPorts(itinerary.ports);
+                controller.renderShip();
+                const addPortButton = document.querySelector('#addPort');
+                addPortButton.disabled = true;
+                noMorePortsButton.disabled = true;
+                }
+                event.preventDefault();
+            }, false);
         </script>    
 </body>
 </html>
