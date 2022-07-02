@@ -15,16 +15,18 @@
     <form>
         <label>Add port</label><br><br>
         <input type="text" id="newPortName" placeholder="port name"><br><br>
-        <input type="submit" id="addPort" value="add port">
+        <input type="submit" id="addPort" value="add">
         <input type="submit" id="noMorePorts" value="done">
     </form>
-    <div id="headsUpBoard">heads up board</div>
+    <div id="headsUpBoard"></div>
     <div id="mainContainer">
         <div id="viewport">
             <div id="ports"></div>
+            <div id="portNames"></div>
             <div id="ship"></div>
             <buttton id="sailbutton">set sail!</buttton>
         </div>
+        
     </div>
         <script src="./src/Controller.js"></script>
         <script src="./src/port.js"></script>

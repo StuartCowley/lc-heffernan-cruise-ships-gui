@@ -52,15 +52,29 @@
         };
         renderPorts(ports) {
             let portsElement = document.querySelector("#ports");
+            let portNameElement = document.querySelector("#portNames");
             portsElement.style.width = '0px';
+            portNameElement.style.width = '0px';
             ports.forEach((port, index) => {
                 const newPortElement = document.createElement('div');
+                const newPortNameElement = document.createElement('div');
+
                 newPortElement.dataset.portName = port.name;
                 newPortElement.dataset.portIndex = index;
                 newPortElement.className = 'port';
+                
+                newPortNameElement.dataset.portName = port.name;
+                newPortNameElement.dataset.portIndex = index;
+                newPortNameElement.className = 'portName';
+                newPortNameElement.innerHTML = `${port.name}`
+
                 portsElement.appendChild(newPortElement);
+                newPortElement.appendChild(newPortNameElement);
+
                 const portsElementWidth = parseInt(portsElement.style.width, 10);
+                const portNameElementWidth = parseInt(portNameElement.style.width, 10);
                 portsElement.style.width = `${portsElementWidth + 256}px`;
+                portNameElement.style.width = `${portNameElementWidth + 256}px`;
             });
         };
         renderShip(){
@@ -68,6 +82,7 @@
             const indexOfCurrentPort = ship.itinerary.ports.indexOf(ship.currentPort);
             const currentPortElement = document.querySelector(`[data-port-index="${indexOfCurrentPort}"]`);
             const shipElement = document.querySelector('#ship');
+            shipElement.style.visibility = 'visible';
             shipElement.style.top = `${currentPortElement.offsetTop + 15}px`;
             shipElement.style.left = `${currentPortElement.offsetLeft - 8}px`;
         };
@@ -117,7 +132,7 @@
             }
         };
         headsUpMessageBoard() {
-            const ship = this.ship;
+            // const ship = this.ship;
             const headsUpElement = document.querySelector('#headsUpBoard');
             headsUpElement.innerHTML = `Current port: ${this.messageCurrentPort}
 Next port: ${this.messageNextPort}`;

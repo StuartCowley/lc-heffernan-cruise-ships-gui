@@ -18,19 +18,33 @@ html {
     background-image: url('../images/water0.png');
 }
 
-#ports {
+#ports, #portNames {
     display: flex;
     justify-content: space-around;
     margin-top: 96px;
 }
 
 #ports > .port {
+    position: relative;
     width: 64px;
     height: 32px;
     background-image: url('../images/port.png');
 }
 
+.portName {
+    position: absolute;
+    top: -25px;
+    left: -43px;
+    width: 150px;
+    height: 32px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
 #ship {
+    visibility: hidden;
     position: absolute;
     width: 128px;
     height: 64px;
@@ -44,7 +58,8 @@ html {
     color: white;
     padding: 10px 20px;
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
+    /* z-index: 0; */
     left: 0;
     width: 100%;
     font-family: 'Press Start 2P', cursive;
@@ -90,10 +105,11 @@ form {
     top: 16px;
     left: 16px;
     position: absolute;
-    border-style: double;
+    border-style: dashed;
     border-color: white;
     padding: 10px;
     width: fit-content;
+    background-color: navy;
 }
 
 label {
@@ -103,4 +119,8 @@ label {
 
 input {
     font-family: 'Press Start 2P', cursive;
+}
+
+#newPortName {
+    width: 200px;
 }
