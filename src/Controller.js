@@ -118,21 +118,23 @@
             }
         };
         renderMessage(message) {
-            const viewportElement = document.querySelector("#viewport"); 
+            const siblingElement = document.querySelector('#sailbutton'); 
+            const parentElement = document.querySelector('#sailbutton').parentNode;
             const newMessageElement = document.createElement('div');
+            siblingElement.style.visibility = 'hidden';
             newMessageElement.id = 'message';
             if(this.endOfItinerary){
                 newMessageElement.innerHTML = `${message}, this is our final port.`
             } else {
                 newMessageElement.innerHTML = message;
             }
-            viewportElement.appendChild(newMessageElement);
+            parentElement.insertBefore(newMessageElement,siblingElement);
             if(!this.endOfItinerary){
-                setTimeout(() => {viewportElement.removeChild(newMessageElement)}, 2000);
-            }
+                setTimeout(() => {
+                    newMessageElement.remove();
+                    siblingElement.style.visibility = 'visible';}, 2000);            }
         };
         headsUpMessageBoard() {
-            // const ship = this.ship;
             const headsUpElement = document.querySelector('#headsUpBoard');
             headsUpElement.innerHTML = `Current port: ${this.messageCurrentPort}
 Next port: ${this.messageNextPort}`;

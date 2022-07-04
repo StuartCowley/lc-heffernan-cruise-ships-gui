@@ -17,16 +17,17 @@
         <input type="text" id="newPortName" placeholder="port name"><br><br>
         <input type="submit" id="addPort" value="add">
         <input type="submit" id="noMorePorts" value="done">
+        <input type="submit" id="reloadPage" value="reset">
     </form>
-    <div id="headsUpBoard"></div>
+    <div id="headsUpBoard">Itinerary:</div>
     <div id="mainContainer">
         <div id="viewport">
             <div id="ports"></div>
             <div id="portNames"></div>
             <div id="ship"></div>
-            <buttton id="sailbutton">set sail!</buttton>
+            
         </div>
-        
+        <buttton id="sailbutton">set sail!</buttton>
     </div>
         <script src="./src/Controller.js"></script>
         <script src="./src/port.js"></script>
@@ -37,10 +38,13 @@
             const addPortButton = document.querySelector('#addPort');
             addPortButton.addEventListener("click", function(event) { 
                 const newPort = document.querySelector('#newPortName');
+                const headsUpBoard = document.querySelector('#headsUpBoard');
                 if(newPort.value){
                 const port = new Port(newPort.value);
                 itinerary.ports.push(port);
                 newPort.value = '';
+                headsUpBoard.innerHTML += `
+${port.name}`;
                 
             } else {
                 alert('You must enter a port name');
@@ -63,6 +67,9 @@
                 }
                 event.preventDefault();
             }, false);
+
+            const reloadPageButton = document.querySelector('#reloadPage');
+            reloadPageButton.addEventListener('click', () => {location.reload();});
         </script>    
 </body>
 </html>
