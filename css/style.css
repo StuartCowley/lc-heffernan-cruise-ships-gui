@@ -2,12 +2,19 @@ html {
     height: 100%;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 #mainContainer {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     background-color: black;
+    padding-top: 200px;
+    padding-bottom: 200px;
 }
 
 #viewport {
@@ -57,12 +64,7 @@ html {
     border-bottom: 4px solid rgb(0, 0, 68);
     color: white;
     padding: 10px 20px;
-    position: absolute;
-    bottom: 180px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 600px;
+    width: 640px;
     font-family: 'Press Start 2P', cursive;
 }
 
@@ -87,12 +89,7 @@ html {
     border-top: 3px solid black;
     color: black;
     padding: 10px 20px;
-    position: absolute;
-    bottom: 180px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 600px;
+    width: 640px;
     font-family: 'Press Start 2P', cursive;
 }
 

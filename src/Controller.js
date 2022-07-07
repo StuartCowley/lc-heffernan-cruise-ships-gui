@@ -121,7 +121,7 @@
             const siblingElement = document.querySelector('#sailbutton'); 
             const parentElement = document.querySelector('#sailbutton').parentNode;
             const newMessageElement = document.createElement('div');
-            siblingElement.style.visibility = 'hidden';
+            siblingElement.style.display = 'none';
             newMessageElement.id = 'message';
             if(this.endOfItinerary){
                 newMessageElement.innerHTML = `${message}, this is our final port.`
@@ -132,7 +132,7 @@
             if(!this.endOfItinerary){
                 setTimeout(() => {
                     newMessageElement.remove();
-                    siblingElement.style.visibility = 'visible';}, 2000);            }
+                    siblingElement.style.display = '';}, 2000);            }
         };
         headsUpMessageBoard() {
             const headsUpElement = document.querySelector('#headsUpBoard');
