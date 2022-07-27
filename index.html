@@ -56,7 +56,7 @@ ${port.name}`;
                 if(itinerary.ports.length<2){
                     alert('you must add a minimum of 2 ports');
                 } else {
-                const ship = new Ship(itinerary);   
+                const ship = new Ship(itinerary);
                 const controller = new Controller(ship); 
                 controller.renderPorts(itinerary.ports);
                 controller.renderShip();
